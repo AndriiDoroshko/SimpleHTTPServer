@@ -6,34 +6,24 @@ import (
 	"log"
 	"net"
 	"net/http"
-	"os"
-	"os/signal"
-	"syscall"
 	"time"
 )
 
 func main() {
-
-	log.Print("simplehttp: Enter main()")
+	log.Print("Simple Http: Enter main()")
 	http.HandleFunc("/", handler)
 
-	server := &http.Server{Addr: ":8080"}
+	server := &http.Server{Addr: ":8088"}
 
-	stopChan := make(chan os.Signal, 1)
-	signal.Notify(stopChan, os.Interrupt, syscall.SIGTERM)
-
-	go func() {
-		server.ListenAndServe()
-		log.Printf("main: serving on 8080")
-	}()
+	server.ListenAndServe()
+	log.Printf("main: serving on 8080")
 
 	log.Printf("main: serving for 30 seconds")
 
-	time.Sleep(10 * time.Second)
+	time.Sleep(30 * time.Second)
 
 	server.Shutdown(context.Background())
-	log.Print("main: server SHUTTED DOWN")
-
+	log.Print("main: server Shutdown")
 }
 
 // printing request headers/params
