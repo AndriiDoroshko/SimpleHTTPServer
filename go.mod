@@ -1,3 +1,3 @@
-module andriidoroshko.com/SimpleHTTPServer
+module andriidoroshko.com/SimpleHTTPServergo
 
 go 1.21.0
